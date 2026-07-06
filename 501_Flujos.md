@@ -81,4 +81,9 @@ ejecutas skill /clima y listo
 
 ### revisar cambios
 
+- Cambiate de rama, checa los cambios y si todo ok, adelante
+- Lanzar pull request
+- Entra code review (automatico por claude)
+- merge y listo
+- en rama main - pull y listo
 
