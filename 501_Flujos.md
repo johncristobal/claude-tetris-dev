@@ -126,3 +126,7 @@ https://code.claude.com/docs/en/common-workflows#use-extended-thinking-thinking-
 
 Decirle a claude "usa thinking mode" 
 
+= sugerencias
+https://gist.github.com/Klerith/6c8d499ee157a6b5844466d73daa47d7
+
+
