@@ -87,6 +87,42 @@ ejecutas skill /clima y listo
 - merge y listo
 - en rama main - pull y listo
 
-### format
+### format Github action
 
 CLAUDE_CODE_OAUTH_TOKEN
+Buenisimo...
+
+Le decimos a claude que genere un **github action**
+esta accion define: asinga labels a los issues, que claude los analice y asigen los labels apropiados
+- Genero yml
+- hacemos push
+- se crea la accion
+
+Ahora si, al cambiar issues, claude genera lables
+IMPRESOINNANTE
+
+OJO
+claude_args: "--allowedTools Bash(gh issue *)"
+claude_args: '--allowed-tools "Bash(gh issue edit:*)" "Bash(gh issue comment:*)" "Bash(gh label list:*)"'        
+
+Aplico este cambio porque no generaba nada, tema de bash
+
+### Cambios desde github Claude code
+- OJO
+settiongs, pages, deploy para publicar pagina
+
+@ Menciones con claude
+En la parte de issues, hacemos
+@claude arregla este issue, lo que hace es ejecutar action claude para corregir issue
+lanzamos PR, checamos cambios y listo
+
+Receurda, VE A LA RAMA, revisa cambios, y si todo ok, merge a main y borra rama
+
+- OJO
+cuando tienes activado el pages, ciandp deployas a main, se actualiza en autom.
+
+### thinking mode
+https://code.claude.com/docs/en/common-workflows#use-extended-thinking-thinking-mode
+
+Decirle a claude "usa thinking mode" 
+
