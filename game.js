@@ -39,8 +39,21 @@ const overlay = document.getElementById('overlay');
 const overlayTitle = document.getElementById('overlay-title');
 const overlayScore = document.getElementById('overlay-score');
 const restartBtn = document.getElementById('restart-btn');
+const themeToggle = document.getElementById('theme-toggle');
 
 let board, current, next, score, lines, level, paused, gameOver, lastTime, dropAccum, dropInterval, animId;
+
+function applyTheme(theme) {
+  document.body.classList.toggle('light-theme', theme === 'light');
+  localStorage.setItem('tetris-theme', theme);
+}
+
+applyTheme(localStorage.getItem('tetris-theme') === 'light' ? 'light' : 'dark');
+
+themeToggle.addEventListener('click', () => {
+  const isLight = document.body.classList.contains('light-theme');
+  applyTheme(isLight ? 'dark' : 'light');
+});
 
 function createBoard() {
   return Array.from({ length: ROWS }, () => new Array(COLS).fill(0));
