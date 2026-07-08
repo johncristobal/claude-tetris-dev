@@ -87,3 +87,6 @@ ejecutas skill /clima y listo
 - merge y listo
 - en rama main - pull y listo
 
+### format
+
+CLAUDE_CODE_OAUTH_TOKEN
