@@ -227,3 +227,49 @@ kbd {
 body.light-theme .theme-toggle .knob {
   transform: translateX(20px);
 }
+
+/* ---- Skin select ---- */
+.skin-select {
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  color: var(--kbd-fg);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.skin-select:focus {
+  outline: 1px solid var(--accent);
+}
+
+/* ---- Skins ---- */
+
+/* Neon: black board with a glow-friendly backdrop regardless of light/dark theme */
+body.skin-neon #board,
+body.skin-neon #next-canvas {
+  background: #000;
+  border-color: #1a1a1a;
+}
+
+/* Pastel: softer, airy board background */
+body.skin-pastel #board,
+body.skin-pastel #next-canvas {
+  background: #fbf7ff;
+  border-color: #e3d9f0;
+}
+
+body.light-theme.skin-pastel #board,
+body.light-theme.skin-pastel #next-canvas {
+  background: #ffffff;
+  border-color: #e3d9f0;
+}
+
+/* Pixel: keep retro palette/background, texture is drawn on the canvas itself */
+body.skin-pixel #board,
+body.skin-pixel #next-canvas {
+  background: var(--board-bg);
+}
