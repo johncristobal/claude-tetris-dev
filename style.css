@@ -142,6 +142,117 @@ kbd {
   color: var(--kbd-fg);
 }
 
+/* ---- Records ---- */
+.records {
+  gap: 8px;
+}
+
+.stat-line {
+  font-size: 11px;
+  color: var(--control-fg);
+}
+
+.value-small {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.leaderboard-list {
+  list-style: decimal inside;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--fg);
+}
+
+.leaderboard-list li {
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaderboard-empty {
+  list-style: none;
+  color: var(--control-fg);
+  font-style: italic;
+}
+
+.leaderboard-list li.is-current-run {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+#reset-scores-btn {
+  margin-top: 4px;
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, color 0.15s;
+}
+
+#reset-scores-btn:hover {
+  background: var(--danger);
+  color: var(--bg);
+}
+
+/* ---- New high score ---- */
+.new-highscore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.new-highscore.hidden {
+  display: none;
+}
+
+.new-highscore-msg {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+#player-name-input {
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  border-radius: 6px;
+  color: var(--fg);
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  text-transform: uppercase;
+  width: 120px;
+}
+
+#save-score-btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s;
+}
+
+#save-score-btn:hover {
+  background: #9bbdff;
+}
+
 /* ---- Overlay ---- */
 .overlay {
   position: absolute;
