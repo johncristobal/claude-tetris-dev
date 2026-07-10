@@ -31,3 +31,30 @@ tal cual le decimos a claide qie una el trabajo en la rama main-2
 =========================
 ### worktress manual
 
+Creamos carpeta .tress y dentro los worktress
+git worktree add .tress/pause
+git worktree add .tress/records
+git worktree add .tress/skins
+
+Crea las carpetas y dentro una copia del proyecto
+
+### agentes paralelo
+Abres consola por cada worktrees
+Lanzas claude
+pones la implentacion en cada termianl
+LISTO
+
+### unir worktrees
+Aqui no es tan facil como con claude...
+como hicimos los worktrees manual, unir tmb es manual
+
+creamos commit por cada consola
+cuando termine listamos worktrees:
+/Users/johncris/Documents/ClaudeCodeDev/03-claude-tetris-dev/.tress/pause    42f0329 [pause]
+/Users/johncris/Documents/ClaudeCodeDev/03-claude-tetris-dev/.tress/records  69e919b [records]
+/Users/johncris/Documents/ClaudeCodeDev/03-claude-tetris-dev/.tress/skins    28a253a [skins]
+
+le decimos a claiude que combine las ramas a main-3 y resuelva los conflictos que puedan salir
+
+listo, al terminar le decimos qie borre los worktress
+AMONOSO!!!!
