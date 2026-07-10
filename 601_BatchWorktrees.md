@@ -20,6 +20,11 @@ worktrees - ramas independientes, trabajar aislado
 empieza a leer y mandara prompt
 worktress:
     - crea agent-id con loas fucniones que se mandan
+    - se crean pull request para cada feature
     - cada uno tiene un index.html, pffff cada uno con su funcion
 
+### unir trabajo 
+tal cual le decimos a claide qie una el trabajo en la rama main-2
+- OJO - habra conflictos, pero claide los ira resolviendo
+- por ulitmo, remueve los worktress, listo
 
