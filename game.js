@@ -48,8 +48,21 @@ const restartPauseBtn = document.getElementById('restart-pause-btn');
 const controlsBtn = document.getElementById('controls-btn');
 const backBtn = document.getElementById('back-btn');
 const startLevelSelect = document.getElementById('start-level');
+const recordsListEl = document.getElementById('records-list');
+const bestComboEl = document.getElementById('best-combo');
+const maxLinesEl = document.getElementById('max-lines');
+const resetRecordsBtn = document.getElementById('reset-records-btn');
+const overlayRecordEntry = document.getElementById('overlay-record-entry');
+const playerNameInput = document.getElementById('player-name');
+const saveRecordBtn = document.getElementById('save-record-btn');
+const overlayRecordsListEl = document.getElementById('overlay-records-list');
+const overlayBestComboEl = document.getElementById('overlay-best-combo');
+const overlayMaxLinesEl = document.getElementById('overlay-max-lines');
 
-let board, current, next, score, lines, level, paused, gameOver, lastTime, dropAccum, dropInterval, animId;
+const RECORDS_KEY = 'tetris-records';
+const MAX_RECORDS = 5;
+
+let board, current, next, score, lines, level, combo, maxCombo, paused, gameOver, lastTime, dropAccum, dropInterval, animId;
 let startLevel = parseInt(localStorage.getItem('tetris-start-level'), 10) || 1;
 
 startLevelSelect.value = startLevel;
@@ -61,6 +74,63 @@ startLevelSelect.addEventListener('change', () => {
 function showPauseView(view) {
   pauseMainView.classList.toggle('hidden', view !== 'main');
   pauseControlsView.classList.toggle('hidden', view !== 'controls');
+}
+
+function loadRecords() {
+  try {
+    const data = JSON.parse(localStorage.getItem(RECORDS_KEY));
+    if (data && Array.isArray(data.scores)) return data;
+  } catch {}
+  return { scores: [], bestCombo: 0, maxLines: 0 };
+}
+
+function saveRecords() {
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(recordsData));
+}
+
+let recordsData = loadRecords();
+
+function isTopScore(s) {
+  return recordsData.scores.length < MAX_RECORDS || s > recordsData.scores[recordsData.scores.length - 1].score;
+}
+
+function addRecord(name, s, l, c) {
+  const rec = { name: name || 'AAA', score: s, lines: l, combo: c };
+  recordsData.scores.push(rec);
+  recordsData.scores.sort((a, b) => b.score - a.score);
+  recordsData.scores = recordsData.scores.slice(0, MAX_RECORDS);
+  saveRecords();
+  return recordsData.scores.indexOf(rec);
+}
+
+function renderRecordsInto(listEl, highlightIndex) {
+  listEl.innerHTML = '';
+  if (!recordsData.scores.length) {
+    const li = document.createElement('li');
+    li.className = 'empty';
+    li.textContent = 'Sin récords';
+    listEl.appendChild(li);
+    return;
+  }
+  recordsData.scores.forEach((r, i) => {
+    const li = document.createElement('li');
+    if (i === highlightIndex) li.classList.add('highlight');
+    const name = document.createElement('span');
+    name.textContent = `${i + 1}. ${r.name}`;
+    const val = document.createElement('span');
+    val.textContent = r.score.toLocaleString();
+    li.append(name, val);
+    listEl.appendChild(li);
+  });
+}
+
+function renderRecords(highlightIndex) {
+  renderRecordsInto(recordsListEl, highlightIndex);
+  renderRecordsInto(overlayRecordsListEl, highlightIndex);
+  bestComboEl.textContent = recordsData.bestCombo;
+  maxLinesEl.textContent = recordsData.maxLines;
+  overlayBestComboEl.textContent = recordsData.bestCombo;
+  overlayMaxLinesEl.textContent = recordsData.maxLines;
 }
 
 function applyTheme(theme) {
@@ -143,6 +213,7 @@ function clearLines() {
     dropInterval = Math.max(100, 1000 - (level - 1) * 90);
     updateHUD();
   }
+  return cleared;
 }
 
 function ghostY() {
@@ -170,7 +241,9 @@ function softDrop() {
 
 function lockPiece() {
   merge();
-  clearLines();
+  const cleared = clearLines();
+  combo = cleared ? combo + 1 : 0;
+  maxCombo = Math.max(maxCombo, combo);
   spawn();
 }
 
@@ -256,7 +329,29 @@ function endGame() {
   cancelAnimationFrame(animId);
   overlayTitle.textContent = 'GAME OVER';
   overlayScore.textContent = `Puntuación: ${score.toLocaleString()}`;
-  overlay.classList.remove('hidden');
+
+  recordsData.bestCombo = Math.max(recordsData.bestCombo, maxCombo);
+  recordsData.maxLines = Math.max(recordsData.maxLines, lines);
+  saveRecords();
+
+  if (isTopScore(score)) {
+    overlayRecordEntry.classList.remove('hidden');
+    playerNameInput.value = '';
+    renderRecords();
+    overlay.classList.remove('hidden');
+    playerNameInput.focus();
+  } else {
+    overlayRecordEntry.classList.add('hidden');
+    renderRecords();
+    overlay.classList.remove('hidden');
+  }
+}
+
+function submitRecord() {
+  const name = playerNameInput.value.trim().slice(0, 10).toUpperCase() || 'AAA';
+  const idx = addRecord(name, score, lines, maxCombo);
+  overlayRecordEntry.classList.add('hidden');
+  renderRecords(idx);
 }
 
 function togglePause() {
@@ -294,6 +389,8 @@ function init() {
   score = 0;
   lines = 0;
   level = startLevel;
+  combo = 0;
+  maxCombo = 0;
   paused = false;
   gameOver = false;
   dropInterval = Math.max(100, 1000 - (level - 1) * 90);
@@ -340,4 +437,17 @@ restartPauseBtn.addEventListener('click', init);
 controlsBtn.addEventListener('click', () => showPauseView('controls'));
 backBtn.addEventListener('click', () => showPauseView('main'));
 
+saveRecordBtn.addEventListener('click', submitRecord);
+playerNameInput.addEventListener('keydown', e => {
+  if (e.code === 'Enter') submitRecord();
+});
+
+resetRecordsBtn.addEventListener('click', () => {
+  if (!confirm('¿Borrar todos los récords?')) return;
+  recordsData = { scores: [], bestCombo: 0, maxLines: 0 };
+  saveRecords();
+  renderRecords();
+});
+
+renderRecords();
 init();

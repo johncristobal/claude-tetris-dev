@@ -116,6 +116,121 @@ body {
   transition: background 0.2s, border-color 0.2s;
 }
 
+/* ---- Records ---- */
+.records-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+}
+
+.records-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--fg);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.records-list li.empty {
+  color: var(--label);
+  justify-content: center;
+}
+
+.records-list li.highlight {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.records-stats,
+.overlay-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--control-fg);
+}
+
+.overlay-stats {
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+}
+
+.reset-records-btn {
+  margin-top: 4px;
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.reset-records-btn:hover {
+  background: var(--danger);
+  color: var(--bg);
+}
+
+.overlay-record-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.overlay-record-entry.hidden {
+  display: none;
+}
+
+.overlay-record-entry label {
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.overlay-record-entry input {
+  background: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  color: var(--fg);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  text-align: center;
+  width: 140px;
+}
+
+.overlay-record-entry button {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.overlay-records {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.overlay-records-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--label);
+  font-weight: 600;
+  text-align: center;
+}
+
 /* ---- Controles ---- */
 .controls ul {
   list-style: none;
