@@ -391,6 +391,18 @@ kbd {
   cursor: pointer;
 }
 
+/* ---- Skin select ---- */
+.skin-select {
+  background: var(--kbd-bg);
+  color: var(--fg);
+  border: 1px solid var(--kbd-border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
 #pause-controls ul {
   list-style: none;
   display: flex;
@@ -404,6 +416,17 @@ kbd {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+/* ---- Skins ---- */
+body.skin-neon {
+  --board-bg: #000000;
+  --board-border: #003333;
+}
+
+body.skin-pastel #board,
+body.skin-pastel #next-canvas {
+  border-radius: 16px;
 }
 
 /* ---- Theme toggle ---- */

@@ -179,6 +179,10 @@ Algunos parámetros fáciles de tunear en `game.js`:
 
 > Si cambias `COLS`, `ROWS` o `BLOCK`, recuerda ajustar también `width` y `height` del `<canvas id="board">` en `index.html` para que coincida (`COLS × BLOCK` × `ROWS × BLOCK`).
 
+### Skins
+
+El selector **SKIN** del panel lateral cambia la apariencia del tablero sin recargar: **Retro** (bloques planos), **Neon** (fondo negro + glow), **Pastel** (colores suaves, bordes redondeados) y **Pixel art** (textura sobre cada bloque). La preferencia se guarda en `localStorage` (`tetris-skin`). Para añadir una skin nueva, agrega una entrada a `SKINS` en `game.js` con su propia paleta `colors` y función `draw(context, x, y, colorIndex, size, alpha)`, y súmala como `<option>` en el `<select id="skin-select">`.
+
 ---
 
 ## Licencia
